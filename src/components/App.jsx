@@ -1,27 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Phonebook from './Phonebook';
 import { Navigate, Route, Routes, Link } from 'react-router-dom';
 import { RegisterPage } from 'pages/RegisterPage';
 import { LoginPage } from 'pages/LoginPage';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'redux/auth/authSelector';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-import { getCurrentUser } from 'redux/auth/authOperations';
-import { logOut } from 'redux/auth/authOperations';
+
+import UserMenu from './UserMenu';
 
 export const App = () => {
   const isAuth = useSelector(selectIsAuth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!isAuth) {
-      dispatch(getCurrentUser());
-    }
-  }, [isAuth, dispatch]);
-  const handleLogOut = () => {
-    dispatch(logOut());
-  };
 
   return (
     <div
@@ -36,15 +26,10 @@ export const App = () => {
     >
       <>
         {isAuth ? (
-          <div>
-            <p>mango@mail.com</p>
-            <button onClick={handleLogOut} type="button">
-              Logout
-            </button>
-          </div>
+          <UserMenu />
         ) : (
           <nav>
-            <Link to={'/contacts'}>Contacts</Link>
+            {/* <Link to={'/contacts'}>Contacts</Link> */}
             <Link to={'/login'}>Login</Link>
             <Link to={'/register'}>Register</Link>
           </nav>
