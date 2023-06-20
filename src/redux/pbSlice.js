@@ -33,8 +33,8 @@ const pbSlice = createSlice({
       state.contacts.isLoading = true;
     },
     [addContact.fulfilled]: (state, action) => {
-      state.contacts.items.push(action.payload);
       state.contacts.isLoading = false;
+      state.contacts.items.push(action.payload);
     },
     [deleteContact.pending]: state => {
       state.contacts.isLoading = true;

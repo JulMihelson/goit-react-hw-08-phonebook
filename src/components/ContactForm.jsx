@@ -25,6 +25,7 @@ const ContactForm = () => {
 
   const handleOnSubmitAdd = event => {
     event.preventDefault();
+    console.log('worling submiyt');
     const alreadyAddedContact = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );

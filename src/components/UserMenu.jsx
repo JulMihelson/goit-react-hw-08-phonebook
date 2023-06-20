@@ -8,3 +8,4 @@ export const userMenu = () => {
     </div>
   );
 };
+export default userMenu;
