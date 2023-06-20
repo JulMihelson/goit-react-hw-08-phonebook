@@ -35,8 +35,26 @@ export const getCurrentUser = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const tokenValue = selectToken(getState());
+
+      if (!tokenValue) {
+        return rejectWithValue();
+      }
       token.set(tokenValue);
       const response = await privateAPI.get('/users/current');
+      return response.data;
+    } catch (error) {
+      token.unset();
+      return rejectWithValue();
+    }
+  }
+);
+
+export const logOut = createAsyncThunk(
+  'auth/logOutUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await privateAPI.post('/users/logout');
+      token.unset();
       return response.data;
     } catch (error) {
       return rejectWithValue();
