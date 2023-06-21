@@ -35,6 +35,8 @@ const ContactForm = () => {
     }
 
     dispatch(addContact({ name, number }));
+    setName('');
+    setNumber('');
   };
 
   return (

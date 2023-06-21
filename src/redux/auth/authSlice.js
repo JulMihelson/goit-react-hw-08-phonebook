@@ -42,7 +42,7 @@ const authSlice = createSlice({
         state.isError = true;
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-        state.user = payload.user;
+        state.user = payload;
         state.isAuth = true;
       })
       .addCase(getCurrentUser.rejected, () => initialState)

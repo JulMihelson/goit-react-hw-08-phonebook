@@ -7,11 +7,20 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from 'redux/auth/authSelector';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
+import { useEffect } from 'react';
+import { getCurrentUser } from 'redux/auth/authOperations';
+import { useDispatch } from 'react-redux';
 
 import UserMenu from './UserMenu';
 
 export const App = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
+  useEffect(() => {
+    if (!isAuth) {
+      dispatch(getCurrentUser());
+    }
+  }, [dispatch, isAuth]);
 
   return (
     <div

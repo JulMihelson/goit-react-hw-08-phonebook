@@ -1,23 +1,19 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { getCurrentUser } from 'redux/auth/authOperations';
 import { logOut } from 'redux/auth/authOperations';
-import { token } from 'redux/http';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../redux/auth/authSelector';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (!token) {
-      dispatch(getCurrentUser());
-    }
-  }, [dispatch]);
   const handleLogOut = () => {
     dispatch(logOut());
   };
+  const user = useSelector(selectUser);
+
   return (
     <div>
-      <p>mango@mail.com</p>
+      <p>{user?.email}</p>
       <button type="button" onClick={handleLogOut}>
         Logout
       </button>

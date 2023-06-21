@@ -5,3 +5,6 @@ export const selectIsAuth = state => {
 export const selectToken = state => {
   return state.auth.token;
 };
+export const selectUser = state => {
+  return state.auth.user;
+};
